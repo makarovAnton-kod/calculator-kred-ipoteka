@@ -1,27 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./../styles/Header.css";
-import {useDispatch, useSelector} from "react-redux";
-import {logoutUser} from "../../store/actions/usersActions";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutUser } from "../../store/actions/usersActions";
 
 function Header() {
     const user = useSelector(state => state.users.user);
     const dispatch = useDispatch();
 
     return (
-        <div className="Header-container">
-            <div className="Header">
-                <Link to="/" style={{marginRight: '20px'}}>Главная</Link><hr/>
-                {user && user.role === 'admin' && <Link to="/admin">Админ панель</Link>}
-                <h1>Калькулятор финансов</h1>
-                {user ?
-                    <button style={{padding: '10px'}} onClick={()=> dispatch(logoutUser())}>Выйти</button>
-                    :
-                <div>
-                    <Link to="/login" style={{marginRight: '10px'}}>Войти</Link>
-                    <Link to="/register">Зарегистрироваться</Link>
-                </div>
-                }
+        <div className="bg-success text-white p-4">
+            <div className="container text-center">
+                <Link className="text-white text-decoration-none" to="/">
+                    <h1>Кредит +</h1>
+                </Link>
+                <hr className="bg-white" />
+                {user && user.role === 'admin' && (
+                    <Link className="text-white text-decoration-none" to="/admin">
+                        Админ панель
+                    </Link>
+                )}
+                {user ? (
+                    <button
+                        className="btn btn-danger mt-2"
+                        onClick={() => dispatch(logoutUser())}>
+                        Выйти
+                    </button>
+                ) : (
+                    <div className="mt-2">
+                        <Link className="text-white text-decoration-none me-3" to="/login">Войти</Link>
+                        <Link className="text-white text-decoration-none" to="/register">Зарегистрироваться</Link>
+                    </div>
+                )}
             </div>
         </div>
     );
