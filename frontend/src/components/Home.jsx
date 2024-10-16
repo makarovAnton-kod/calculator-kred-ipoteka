@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import Calculator from "./calculators/Calculator";
+import { Button, Card, Container } from "react-bootstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './styles/Home.css';
+import {resetCalculatorData} from "../store/actions/calculatorActions";
+import {useDispatch} from "react-redux";
 
 function Home() {
+    const dispatch = useDispatch();
     const [activeCalculator, setActiveCalculator] = useState("mortgage");
-
+    const handleLoanTypeSwitch = (loanType) => {
+        dispatch(resetCalculatorData());  // Сброс данных калькулятора
+        setActiveCalculator(loanType);    // Переключение типа кредита
+    };
     const renderCalculator = () => {
         switch (activeCalculator) {
             case "mortgage":
@@ -19,33 +27,34 @@ function Home() {
     };
 
     return (
-        <div className="Home">
-            <div className="calculator-buttons">
-                <button
-                    className={`link-button ${activeCalculator === "mortgage" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("mortgage")}
-                >
-                    Ипотека
-                </button>
-                <div className="line-between"></div>
-                <button
-                    className={`link-button ${activeCalculator === "car" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("car")}
-                >
-                    Автокредитование
-                </button>
-                <div className="line-between"></div>
-                <button
-                    className={`link-button ${activeCalculator === "consumer" ? "active" : ""}`}
-                    onClick={() => setActiveCalculator("consumer")}
+        <Container className="mt-4">
+            <h2 className="text-center mb-4">Тип кредита расчета</h2>
+            <div className="d-flex justify-content-center mb-4">
+                <Button
+                    className={`custom-button me-2 ${activeCalculator === "consumer" ? "active" : ""}`}
+                    onClick={() => handleLoanTypeSwitch("consumer")}
                 >
                     Потребительский кредит
-                </button>
+                </Button>
+                <Button
+                    className={`custom-button me-2 ${activeCalculator === "car" ? "active" : ""}`}
+                    onClick={() => handleLoanTypeSwitch("car")}
+                >
+                    Автокредитование
+                </Button>
+                <Button
+                    className={`custom-button ${activeCalculator === "mortgage" ? "active" : ""}`}
+                    onClick={() => handleLoanTypeSwitch("mortgage")}
+                >
+                    Ипотека
+                </Button>
             </div>
-            <div className="calculator-display">
-                {renderCalculator()}
-            </div>
-        </div>
+            <Card className="calculator-display shadow">
+                <Card.Body>
+                    {renderCalculator()}
+                </Card.Body>
+            </Card>
+        </Container>
     );
 }
 

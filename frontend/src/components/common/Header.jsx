@@ -1,38 +1,42 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "../../store/actions/usersActions";
+import './../styles/Header.css'; // Импортируем CSS для пользовательских стилей
 
 function Header() {
     const user = useSelector(state => state.users.user);
     const dispatch = useDispatch();
 
     return (
-        <div className="bg-success text-white p-4">
-            <div className="container text-center">
-                <Link className="text-white text-decoration-none" to="/">
-                    <h1>Кредит +</h1>
+        <Navbar className="custom-navbar" expand="lg">
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">
+                    <h1 className="brand-title">Кредит +</h1>
                 </Link>
-                <hr className="bg-white" />
-                {user && user.role === 'admin' && (
-                    <Link className="text-white text-decoration-none" to="/admin">
-                        Админ панель
-                    </Link>
-                )}
-                {user ? (
-                    <button
-                        className="btn btn-danger mt-2"
-                        onClick={() => dispatch(logoutUser())}>
-                        Выйти
-                    </button>
-                ) : (
-                    <div className="mt-2">
-                        <Link className="text-white text-decoration-none me-3" to="/login">Войти</Link>
-                        <Link className="text-white text-decoration-none" to="/register">Зарегистрироваться</Link>
+                <Navbar.Toggle aria-controls="navbarNav" />
+                <Navbar.Collapse id="navbarNav">
+                    <Nav className="me-auto">
+                        {user && user.role === 'admin' && (
+                            <Link className="nav-link" to="/admin">Админ панель</Link>
+                        )}
+                    </Nav>
+                    <div className="d-flex">
+                        {user ? (
+                            <Button variant="outline-danger" onClick={() => dispatch(logoutUser())}>
+                                Выйти
+                            </Button>
+                        ) : (
+                            <>
+                                <Link className="btn btn-outline-success me-2" to="/login">Войти</Link>
+                                <Link className="btn btn-outline-warning" to="/register">Зарегистрироваться</Link>
+                            </>
+                        )}
                     </div>
-                )}
+                </Navbar.Collapse>
             </div>
-        </div>
+        </Navbar>
     );
 }
 

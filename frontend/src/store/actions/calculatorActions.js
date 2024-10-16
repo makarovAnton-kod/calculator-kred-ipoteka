@@ -1,7 +1,7 @@
 import axiosApi from "../../axiosApi";
 import {
     CALCULATE_LOAN_FAILURE,
-    CALCULATE_LOAN_SUCCESS, SEND_EMAIL_FAILURE,
+    CALCULATE_LOAN_SUCCESS, RESET_CALCULATOR_DATA, SEND_EMAIL_FAILURE,
     SEND_EMAIL_REQUEST,
     SEND_EMAIL_SUCCESS,
     SET_CALCULATOR_DATA
@@ -67,4 +67,10 @@ export const sendEmail = (email) => async (dispatch, getState) => {
             payload: error.message
         });
     }
+};
+
+export const resetCalculatorData = () => {
+    return {
+        type: RESET_CALCULATOR_DATA,
+    };
 };

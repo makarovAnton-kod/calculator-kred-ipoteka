@@ -5,7 +5,7 @@ import {
     SEND_EMAIL_REQUEST,
     SEND_EMAIL_SUCCESS,
     SEND_EMAIL_FAILURE,
-
+    RESET_CALCULATOR_DATA
 } from '../actionTypes';
 
 const initialState = {
@@ -64,7 +64,9 @@ export const calculatorReducer = (state = initialState, action) => {
                 emailSent: false,
                 error: action.payload
             };
-            default:
+        case RESET_CALCULATOR_DATA:
+            return initialState; // Возвращение начального состояния
+        default:
             return state;
     }
 };

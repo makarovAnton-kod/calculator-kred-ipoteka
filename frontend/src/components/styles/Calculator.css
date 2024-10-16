@@ -1,0 +1,72 @@
+.calculator-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    background: linear-gradient(to bottom right, #f8f9fa, #e9ecef);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.calculator-card {
+    background: white;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+}
+
+.loan-type-title {
+    font-size: 24px;
+    color: #343a40;
+}
+
+.interest-rate {
+    font-size: 48px;
+    color: #28a745;
+}
+
+.calculator-form {
+    margin-top: 20px;
+}
+
+.info-value-block {
+    background: #f1f3f5;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    color: #495057;
+    font-size: 16px;
+}
+
+.info-value {
+    width: 30%;
+    font-weight: 500;
+}
+
+button {
+    width: 45%;
+}
+
+button:disabled {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+button:disabled:hover {
+    cursor: not-allowed;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+}
+
+.modal-body {
+    background-color: #fff;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+}
